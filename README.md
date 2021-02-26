@@ -8,6 +8,7 @@ python3 -m venv venv
 source venv/bin/activate
 pip install requests
 pip install influxdb
+pip install pandas
 ```
 
 Test with
