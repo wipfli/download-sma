@@ -32,10 +32,11 @@ def get_points(df):
     influx_time = datetime.datetime.strptime(str(timestamp), 
         '%Y%m%d%H%M').strftime('%Y-%m-%dT%H:%M:%SZ')
     sma_to_wigos = get_sma_to_wigos()
+    blacklist = ['HAI']
     for i in range(len(df['Date'])):
         for col in df.columns.values[2:]:
             value = float(df[col][i])
-            if not math.isnan(value):
+            if not math.isnan(value) and df['Station/Location'][i] not in blacklist:
                 point = {
                     'measurement': 'stations',
                     'tags': {
