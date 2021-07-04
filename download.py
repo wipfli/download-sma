@@ -10,8 +10,8 @@ import time
 def get_sma_to_wigos():
     sma_to_wigos = {}
     r = requests.get('https://data.geo.admin.ch/ch.meteoschweiz.messnetz-automatisch/ch.meteoschweiz.messnetz-automatisch_de.csv')
-    df = pd.read_csv(io.StringIO(r.text), sep=';', na_values='-')
-    for i in range(299):
+    df = pd.read_csv(io.StringIO(r.text), sep=';', na_values='-', skipfooter=3)
+    for i in range(len(df)):
         if df.loc[i]['Stationstyp'] == 'Wetterstation':
             wigos = df.loc[i]['WIGOS-ID']
             sma = df.loc[i]['Abk.']
